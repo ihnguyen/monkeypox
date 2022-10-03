@@ -1,8 +1,4 @@
-Evaluating Monkeypox cases and trends across multiple continents
-
-STAT650 - R for Data Science
-
-Thuy-Nhi Nguyen
+# Evaluating Monkeypox cases and trends across multiple continents
 
 Monkeypox is a rare disease caused by the monkeypox virus. The virus is in the same family as smallpox. Monkey pox symptoms are milder than smallpox symptoms, and often don’t result in death. monkey pox was first discovered in 1958 in primates, but the origin of the disease is unknown. With the recent 2022 outbreak of monkeypox, there is speculation that monkeypox traveled to other countries from international travel to central and western African countries. The main research question is to evaluate monkeypox cases and trends in multiple continents.
 
