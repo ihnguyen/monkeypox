@@ -49,3 +49,4 @@ In Figure 2, the time series plot indicated an upward trend during the summer se
 
 Of the 65,546 entries, the majority of the patient demographic data was missing (96%). But the available patient demographic data showed that only 0.8% of women make up the population impacted by monkeypox. Although the CDC is aware that the majority of men make up the monkeypox demographic, they still advise those who are infected by monkeypox to cover up active open skin lesions or ulcers or rashes to limit the spread of the virus regardless of gender.
 
+Source: https://www.kaggle.com/datasets/deepcontractor/monkeypox-dataset-daily-updated?select=Worldwide_Case_Detection_Timeline.csv
