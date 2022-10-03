@@ -1,5 +1,7 @@
 Evaluating Monkeypox cases and trends across multiple continents
+
 STAT650 - R for Data Science
+
 Thuy-Nhi Nguyen
 
 Monkeypox is a rare disease caused by the monkeypox virus. The virus is in the same family as smallpox. Monkey pox symptoms are milder than smallpox symptoms, and often don’t result in death. monkey pox was first discovered in 1958 in primates, but the origin of the disease is unknown. With the recent 2022 outbreak of monkeypox, there is speculation that monkeypox traveled to other countries from international travel to central and western African countries. The main research question is to evaluate monkeypox cases and trends in multiple continents.
@@ -10,16 +12,42 @@ Each data set has one commonality which is country. To understand what are commo
 
 To perform data wrangling and visualization, the following R libraries were used: tidyverse, readr, dpylr, ggplot2, lubridate, forcats, stringr.
 
-Table 1: Common words used to describe monkeypox symptoms.
+
+<details><summary>Table 1: Common words used to describe monkeypox symptoms.</summary>
+<p>
+
+![common_symp(cropped)](https://user-images.githubusercontent.com/73903035/193513696-c9faa8be-f109-48e1-bb20-c757f2aaaea0.jpg)
+
+
+</p>
+</details>
+
 
 Table 1 displays the most common words that are used to describe monkeypox symptoms are lesion, ulcer, fever, and rash. The next set of common words used were skin, headache, and fatigue.These words indicate painful skin-like conditions are commonly associated with monkeypox. The less common words can be helpful for diagnosis.
 
 
-Figure 1: Countries with at least 50 confirmed monkeypox cases as of September 9th, 2022.
+<details><summary>Figure 1: Countries with at least 50 confirmed monkeypox cases as of September 9th, 2022.</summary>
+<p>
+
+![confirmed_cases](https://user-images.githubusercontent.com/73903035/193513316-c26bfb2a-8468-488e-b82b-8c08e4e1663a.png)
+
+
+</p>
+</details>
+
 
 Figure 1 results show that the United States of America has the largest number of confirmed cases to date. To further investigate the trend of monkeypox, a time series plot was developed to determine which months had the largest number of cases.
 
-Figure 2: Daily trend of monkeypox confirmed cases count by month in the most impacted country, the United States of America.
+
+<details><summary>Figure 2: Daily trend of monkeypox confirmed cases count by month in the most impacted country, the United States of America.</summary>
+<p>
+
+![dailycases](https://user-images.githubusercontent.com/73903035/193513708-1e0297a4-5a10-47aa-8bf8-45a9aeb27c94.png)
+
+
+</p>
+</details>
+
 
 In Figure 2, the time series plot indicated an upward trend during the summer season and a downward trend towards the start of the fall season. Since there is little data on monkeypox, we cannot assume a seasonal connection to monkeypox. There is evidence that shows since summer season is peak travel season, it could explain the spike in cases during that time period.
 
