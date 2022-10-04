@@ -1,13 +1,18 @@
 # Evaluating Monkeypox cases and trends across multiple continents
 
-Monkeypox is a rare disease caused by the monkeypox virus. The virus is in the same family as smallpox. Monkey pox symptoms are milder than smallpox symptoms, and often don’t result in death. monkey pox was first discovered in 1958 in primates, but the origin of the disease is unknown. With the recent 2022 outbreak of monkeypox, there is speculation that monkeypox traveled to other countries from international travel to central and western African countries. The main research question is to evaluate monkeypox cases and trends in multiple continents.
+Introduction
 
-Three data sets were compiled to expand knowledge about monkeypox across multiple continents. They were sourced from kaggle. Each contained valuable information about countries with high prevalence of monkeypox. The first data set is the daily cases data set which contains the number of cases on each day starting from January 1st, 2022 to September 9th, 2022 although consistent daily data collection occurred on May 23rd, 2022. The second data set is the cases data set which contains each country and their confirmed cases, and suspected cases. This data set contains 129 out of 195 possible countries in the world with the confirmed cases, suspected cases, hospitalization, and travel history information. The third data set is the timeline data set which contains 65,546 entries of confirmed cases with their country, city, gender, age, symptoms, hospitalization and isolation status, and travel history.
+In 1958, monkeypox was first discovered in primates, but the origin of the disease is unknown. The virus was caused by the monkeypox virus which is in the same family as smallpox. Although monkeypox symptoms are milder than smallpox symptoms and often don’t result in death, those who contract the disease may deal with uncomfortable symptoms. With the recent 2022 outbreak of monkeypox, there is speculation that monkeypox traveled to other countries through international travel from central and western African countries. In this study, monkeypox cases and trends are evaluated for their case count and common symptoms in multiple countries. The country with the largest case count will further be evaluated using a time series plot to discover trends of the disease.
 
-Each data set has one commonality which is country. To understand what are common monkeypox symptoms across all countries, the first data set was analyzed for common words used. From the second data set, the variable of interest is the confirmed case count to determine the country of interest with the highest number of confirmed cases. To explore further on the highly impacted country, the third data set was used to gather more information about which months had the lowest and highest count of monkeypox confirmed cases. information of the most impacted country will , and dates. Although the age variable would be useful for analysis, the age range was not standardized across all countries’ data collection process, therefore, it was difficult to interpret and to use for analysis.
+Data Description
 
-To perform data wrangling and visualization, the following R libraries were used: tidyverse, readr, dpylr, ggplot2, lubridate, forcats, stringr.
+Three data sets were compiled from kaggle to learn more about monkeypox across multiple continents. The first data set was the daily cases data set which contained 112 countries out of 195 possible countries in the world and the number of cases on each day starting from January 1st, 2022 to September 9th, 2022. Since the data set had inconsistent daily data collection from January 1st to May 23rd, only 142 date variables were available. The next data set was the cases data set which contained 129 countries with five other variables on their confirmed cases, suspected cases, hospitalization, case count on those who traveled, and case count on those who did not travel. The last data set was the timeline data set which contained 65,546 entries of confirmed cases in each country with eight other variables on the affected individual’s city, gender, age, symptoms, hospitalization status, isolation status, and travel history. Of the 65,546 entries, the majority of the patient gender demographic data was missing (96%). But the available patient demographic data showed that only 0.8% of women make up the population impacted by monkeypox.
 
+Method
+
+To understand what were common monkeypox symptoms across all countries, the daily cases data set was analyzed for common words using stringr library. To determine the country of interest with the highest number of confirmed cases, the confirmed cases variable from the cases data set was assessed. To explore further on the most impacted country to date, information was gathered from the timeline data set to visualize a time series plot using the lubridate and ggplot2 library. Other additional libraries used to perform data wrangling and visualization involved tidyverse, readr, dplyr, and forcats. Although the age variable would be useful and interesting for analysis, the age range was not standardized across all countries’ data collection process; therefore, was not evaluated in the study.
+
+Results
 
 <details><summary>Table 1: Common words used to describe monkeypox symptoms.</summary>
 <p>
@@ -19,7 +24,7 @@ To perform data wrangling and visualization, the following R libraries were used
 </details>
 
 
-Table 1 displays the most common words that are used to describe monkeypox symptoms are lesion, ulcer, fever, and rash. The next set of common words used were skin, headache, and fatigue.These words indicate painful skin-like conditions are commonly associated with monkeypox. The less common words can be helpful for diagnosis.
+Table 1 displayed the most common words that were used to describe monkeypox symptoms. The most common symptoms were lesion, ulcer, fever, and rash. The second most common words were skin, headache, and fatigue. A pattern arises amongst all the words which would indicate painful skin-like conditions.
 
 
 <details><summary>Figure 1: Countries with at least 50 confirmed monkeypox cases as of September 9th, 2022.</summary>
@@ -32,10 +37,10 @@ Table 1 displays the most common words that are used to describe monkeypox sympt
 </details>
 
 
-Figure 1 results show that the United States of America has the largest number of confirmed cases to date. To further investigate the trend of monkeypox, a time series plot was developed to determine which months had the largest number of cases.
+In Figure 1, the results showed that the United States of America has the largest number of confirmed cases to date with Brazil and Spain next. To further investigate the trend of monkeypox in the most impacted country, a time series plot was performed.
 
 
-<details><summary>Figure 2: Daily trend of monkeypox confirmed cases count by month in the most impacted country, the United States of America.</summary>
+<details><summary>Figure 2: Daily trend of monkeypox confirmed cases count by month in the most impacted country, the United States of America. A local regression line (blue) was applied on top of the time series plot.</summary>
 <p>
 
 ![dailycases](https://user-images.githubusercontent.com/73903035/193513708-1e0297a4-5a10-47aa-8bf8-45a9aeb27c94.png)
@@ -44,8 +49,9 @@ Figure 1 results show that the United States of America has the largest number o
 </p>
 </details>
 
+Figure 2 illustrated the time series plot with an upward trend during the summer season and a downward trend towards the start of the fall season. Local regression was applied to the time series plot to show the trend smoothed out for easy interpretation. Since there is little data on monkeypox due to how recent the outbreak occurred, we cannot assume a seasonal or cyclical connection to monkeypox. But there was evidence that showed a possible connection between the summer season and peak travel season which could explain the spike in cases during the last summer time period.
 
-In Figure 2, the time series plot indicated an upward trend during the summer season and a downward trend towards the start of the fall season. Since there is little data on monkeypox, we cannot assume a seasonal connection to monkeypox. There is evidence that shows since summer season is peak travel season, it could explain the spike in cases during that time period.
+This study showed that painful skin-like issues were common symptoms in those affected with monkeypox. The high confirmed case count in the United States of America is worrisome and the monkeypox trend in the United States appears active during the summer months. Although monkeypox outbreak peaked during the summer months, it appears to be heading to a lower case count as we progress to the autumn and winter months. The CDC has clinical treatment information available for those affected by monkeypox and advise those to cover up active open skin lesions or ulcers or rashes to limit the spread of the virus.
 
-Of the 65,546 entries, the majority of the patient demographic data was missing (96%). But the available patient demographic data showed that only 0.8% of women make up the population impacted by monkeypox. Although the CDC is aware that the majority of men make up the monkeypox demographic, they still advise those who are infected by monkeypox to cover up active open skin lesions or ulcers or rashes to limit the spread of the virus regardless of gender.
 
+Source: https://www.kaggle.com/datasets/deepcontractor/monkeypox-dataset-daily-updated?select=Worldwide_Case_Detection_Timeline.csv
