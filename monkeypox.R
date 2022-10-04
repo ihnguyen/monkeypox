@@ -1,21 +1,29 @@
+# Load libraries
 library(tidyverse)
 library(lubridate)
+library(gridExtra)
 
+# Load data sets
 timeline <- read_csv("Worldwide_Case_Detection_Timeline.csv")
 cases <- read_csv("Monkey_Pox_Cases_Worldwide.csv")
 daily <- read_csv("Daily_Country_Wise_Confirmed_Cases.csv")
 
+# Data Wrangling
 timeline$Gender <- str_to_lower(timeline$Gender)
 timeline$Country <- as.factor(timeline$Country)
 cases$Country <- as.factor(cases$Country)
 daily$Country <- as.factor(daily$Country)
 
-
+# Figure 1: Countries with at least 50 confirmed cases
+## Filter data
 c1 <- cases %>% filter(Confirmed_Cases>50)
+## Plot data
 c1 %>% mutate(Country = fct_reorder(Country,Confirmed_Cases)) %>%
   ggplot() + geom_point(aes(Confirmed_Cases, Country)) +
   xlab("Confirmed Cases")
 
+# Figure 2: Daily trend of monkeypox confirmed cases count
+## Perform lubridate to parse dates
 d1 <- daily %>% pivot_longer(c("2022-01-31", "2022-02-17", "2022-02-28", "2022-03-04", "2022-03-31", "2022-04-10", "2022-04-12",
                                "2022-04-30", "2022-05-06", "2022-05-08", "2022-05-12", "2022-05-13", "2022-05-15", "2022-05-17", "2022-05-18",
                                "2022-05-19", "2022-05-20", "2022-05-21", "2022-05-23", "2022-05-24", "2022-05-25", "2022-05-26", "2022-05-27",
@@ -36,18 +44,25 @@ d1 <- daily %>% pivot_longer(c("2022-01-31", "2022-02-17", "2022-02-28", "2022-0
                                "2022-09-17", "2022-09-18", "2022-09-19", "2022-09-20", "2022-09-21", "2022-09-22"), names_to = "dates",
                              values_to = "count")
 d1$dates <- ymd(d1$dates)
+## Confirm variable is a date variable
 class(d1$dates)
+## Subset data to confirmed cases of most impacted country
 d2 <- d1 %>% filter(Country == "United States", count>0)
+## View if there are any trends by weekday
 table(wday(d2$dates,label=T))
+## View if there are any trends by month
 table(month(d2$dates,label=T))
+## Plot time series plot by month
 d2 %>% ggplot(aes(x=dates,y=count)) +
   geom_line(size=0.3) +
   geom_smooth(span=0.3, se=F) +
   xlab("Month") +
   ylab("Case Count")
 
-table(timeline$Gender)
+# Table 1: Common words used to describe monkeypox symptoms
+## Count observations with similar symptoms
 table(timeline$Symptoms)
+## Define variables for text analysis
 skin = sum(table(str_extract(timeline$Symptoms, ".kin")))
 ulcer = sum(table(str_extract(timeline$Symptoms, ".lcer")))
 rash = sum(table(str_extract(timeline$Symptoms, ".ash")))
@@ -61,16 +76,25 @@ headache = sum(table(str_extract(timeline$Symptoms, ".eadache")))
 diarrhea = sum(table(str_extract(timeline$Symptoms, ".iarrhea")))
 fatigue = sum(table(str_extract(timeline$Symptoms, ".atigue")))
 blister = sum(table(str_extract(timeline$Symptoms, ".lister")))
-
-
+## Combine all variables for text analysis
 b <- tibble(skin,ulcer,rash,lesion,swallow,back,fever,throat,itch,headache,diarrhea,fatigue,blister)
+## Tidy data for text analysis
 b1 <- b %>% pivot_longer(c(skin,ulcer,rash,lesion,swallow,back,fever,throat,itch,headache,diarrhea,fatigue,blister),
                          names_to = "Issue", values_to = "Count") %>% arrange(desc(Count))
 b1$Issue <- as.factor(b1$Issue)
+## Modify factor order
 b1 %>%
   mutate(Issue = fct_reorder(Issue,Count))
+## Reset graphics
 dev.off()
-library(gridExtra)
+## Use gridExtra library for a more presentable table for paper
 grid.table(b1)
+## Reset graphics
 dev.off()
+
+# calculate missing data in gender variable
 sum(is.na(timeline$Gender))/nrow(timeline)
+
+# Create frequency table on gender with available data
+table(timeline$Gender)
+
