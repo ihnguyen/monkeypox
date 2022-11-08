@@ -18,6 +18,7 @@ Results
 <p>
 
 ![common_symp(cropped)](https://user-images.githubusercontent.com/73903035/193513696-c9faa8be-f109-48e1-bb20-c757f2aaaea0.jpg)
+![wordcloud](https://user-images.githubusercontent.com/73903035/200568887-bf407682-d8ca-4475-9dc8-01aad28bb69d.png)
 
 
 </p>
