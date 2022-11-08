@@ -2,17 +2,27 @@
 library(tidyverse)
 library(lubridate)
 library(gridExtra)
+library(wordcloud)
+
+
+
 
 # Load data sets
 timeline <- read_csv("Worldwide_Case_Detection_Timeline.csv")
 cases <- read_csv("Monkey_Pox_Cases_Worldwide.csv")
 daily <- read_csv("Daily_Country_Wise_Confirmed_Cases.csv")
 
+
+
+
 # Data Wrangling
 timeline$Gender <- str_to_lower(timeline$Gender)
 timeline$Country <- as.factor(timeline$Country)
 cases$Country <- as.factor(cases$Country)
 daily$Country <- as.factor(daily$Country)
+
+
+
 
 # Figure 1: Countries with at least 50 confirmed cases
 ## Filter data
@@ -21,6 +31,10 @@ c1 <- cases %>% filter(Confirmed_Cases>50)
 c1 %>% mutate(Country = fct_reorder(Country,Confirmed_Cases)) %>%
   ggplot() + geom_point(aes(Confirmed_Cases, Country)) +
   xlab("Confirmed Cases")
+
+
+
+
 
 # Figure 2: Daily trend of monkeypox confirmed cases count
 ## Perform lubridate to parse dates
@@ -59,6 +73,11 @@ d2 %>% ggplot(aes(x=dates,y=count)) +
   xlab("Month") +
   ylab("Case Count")
 
+
+
+
+
+
 # Table 1: Common words used to describe monkeypox symptoms
 ## Count observations with similar symptoms
 table(timeline$Symptoms)
@@ -92,8 +111,16 @@ grid.table(b1)
 ## Reset graphics
 dev.off()
 
-# calculate missing data in gender variable
+b1 %>%
+  with(wordcloud(Issue, Count))
+
+
+
+# Calculate missing data in gender variable
 sum(is.na(timeline$Gender))/nrow(timeline)
+
+
+
 
 # Create frequency table on gender with available data
 table(timeline$Gender)
